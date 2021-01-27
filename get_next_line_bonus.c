@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clim <clim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 11:27:39 by clim              #+#    #+#             */
-/*   Updated: 2021/01/15 15:31:37 by clim             ###   ########.fr       */
+/*   Updated: 2021/01/15 13:40:56 by clim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int				if_more_line(char *backup_buf)
 {
-	int			idx;
+	int			i;
 
-	idx = 0;
-	while (backup_buf[idx])
+	i = 0;
+	while (backup_buf[i])
 	{
-		if (backup_buf[idx] == '\n')
-			return (idx);
-		idx++;
+		if (backup_buf[i] == '\n')
+			return (i);
+		i++;
 	}
 	return (-1);
 }
@@ -76,10 +76,7 @@ int				get_next_line(int fd, char **line)
 	{
 		temp = backup_buf[fd];
 		buf[byte_read] = 0;
-		if (!backup_buf[fd])
-			backup_buf[fd] = ft_strdup(buf);
-		else
-			backup_buf[fd] = ft_strjoin(backup_buf[fd], buf);
+		backup_buf[fd] = ft_strjoin(backup_buf[fd], buf);
 		if (temp)
 			free(temp);
 		idx = if_more_line(backup_buf[fd]);
